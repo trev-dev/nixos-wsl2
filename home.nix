@@ -83,11 +83,17 @@ in {
       t = "task";
       lg = "lazygit";
       ti = "timew";
-      tib = "timew billable";
+      tui = "taskwarrior-tui";
       tm = "task mod";
       tu = "taskwarrior-tui";
       zke = "zk edit --interactive";
       zkl = "zk list --interactive";
+      gd = "git diff";
+      gs = "git status";
+      gl = "git log --oneline";
+      gco = "git checkout";
+      ga = "git add";
+      gc = "git commit";
     };
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
