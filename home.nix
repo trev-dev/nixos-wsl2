@@ -79,7 +79,7 @@ in {
       la = "ls -al";
       ll = "ls -l";
       nv = "nvim";
-      r = "ranger";
+      r = "ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd \"$LASTDIR\"";
       t = "task";
       lg = "lazygit";
       ti = "timew";
