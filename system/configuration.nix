@@ -11,6 +11,10 @@ in
     nixos-wsl.nixosModules.wsl
   ];
 
+  i18n.defaultLocale = "en_US.UTF-8";
+  time.timeZone = "America/Vancouver";
+
+
   environment.systemPackages = with pkgs; [ neovim pinentry ];
 
   programs.zsh.enable = true;
@@ -28,6 +32,7 @@ in
     automountPath = "/mnt";
     defaultUser = "trev";
     startMenuLaunchers = true;
+    interop.includePath = false;
 
     # Enable native Docker support
     docker-native.enable = true;
