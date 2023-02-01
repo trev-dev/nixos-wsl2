@@ -31,18 +31,23 @@ in {
     gcc
     git
     lazygit
+    jdk17
+    jp2a
     current.neovim
     newman
     nodejs
     pandoc
     postman
+    python39
     ranger
+    ripgrep
     sumneko-lua-language-server
     rnix-lsp
     taskwarrior
     taskwarrior-tui
     timewarrior
     unzip
+    wget
     xclip
     zk
     zoxide
@@ -94,6 +99,7 @@ in {
       gco = "git checkout";
       ga = "git add";
       gc = "git commit";
+      intellij = "nvim";
     };
     enableAutosuggestions = true;
     enableSyntaxHighlighting = true;
