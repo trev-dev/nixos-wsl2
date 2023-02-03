@@ -34,6 +34,7 @@ in {
     jdk17
     jp2a
     current.neovim
+    google-chrome
     newman
     nodejs
     pandoc
