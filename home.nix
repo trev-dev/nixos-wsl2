@@ -146,6 +146,9 @@ in {
       init = {
         defaultBranch = "main";
       };
+      core = {
+        excludesFile = "~/.gitignore";
+      };
     };
   };
 
@@ -198,6 +201,11 @@ in {
   xdg.enable = true;
 
   home.file.".npmrc".text = "prefix=/home/trev/.local/node\n";
+  home.file.".gitignore".text = ''
+    shell.nix
+    jsconfig.json
+    shims-*.d.ts
+  '';
   xdg.configFile."zk".source = config/zk;
 }
 
