@@ -32,7 +32,7 @@ in
     automountPath = "/mnt";
     defaultUser = "trev";
     startMenuLaunchers = true;
-    interop.includePath = false;
+    /* interop.includePath = false; */
 
     # Enable native Docker support
     docker-native.enable = true;
