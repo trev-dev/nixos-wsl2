@@ -1,4 +1,10 @@
 # vim: ft=bash
+
+# If this is not a login shell, source the profile.
+if [[ $- == *i* ]]; then
+  source ~/.profile
+fi;
+
 prompt_git() {
   local s='';
   local branchName='';
