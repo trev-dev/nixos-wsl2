@@ -15,16 +15,16 @@ in
   time.timeZone = "America/Vancouver";
 
 
-  environment.systemPackages = with pkgs; [ neovim pinentry ];
-
-  programs.zsh.enable = true;
+  environment = {
+    systemPackages = with pkgs; [ neovim pinentry ];
+    pathsToLink = ["/share/bash-completion"];
+  };
 
   users.users.trev = {
     isNormalUser = true;
     home = "/home/trev";
     description = "Trevor Richards";
     extraGroups = [ "docker" "wheel" ];
-    shell = pkgs.zsh;
   };
 
   wsl = {
@@ -32,7 +32,7 @@ in
     automountPath = "/mnt";
     defaultUser = "trev";
     startMenuLaunchers = true;
-    /* interop.includePath = false; */
+    interop.includePath = true;
 
     # Enable native Docker support
     docker-native.enable = true;

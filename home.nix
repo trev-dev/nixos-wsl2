@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 let
+  unstable = import <nixpkgs-unstable> {};
   current = import <nixpkgs-current> {};
 in {
   # Home Manager needs a bit of information about you and the
@@ -27,22 +28,27 @@ in {
 
   home.packages = with pkgs; [
     bat
+    carlito
     dbeaver
     gcc
     git
     lazygit
-    jdk17
+    kitty
+    unstable.jdk19
     jp2a
-    current.neovim
+    lombok
+    unstable.neovim
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
     google-chrome
     newman
     nodejs
+    noto-fonts
     pandoc
     postman
     python39
     ranger
     ripgrep
-    sumneko-lua-language-server
+    unstable.lua-language-server
     rnix-lsp
     taskwarrior
     taskwarrior-tui
@@ -57,29 +63,18 @@ in {
 
   nixpkgs.config.allowUnfree = true;
 
-  programs.fzf.enable = true;
+  programs.fzf = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+
   programs.zoxide = {
     enable = true;
-    enableZshIntegration = true;
+    enableBashIntegration = true;
   };
 
   # Shell Config: {{{
-  home.sessionVariables = with lib.strings; {
-    EDITOR = "nvim";
-    SUDO_EDITOR = "nvim";
-    ZK_NOTEBOOK_DIR = "/home/trev/Notes";
-    SSH_AUTH_SOCK = "$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)";
-    WIN_HOME = "/mnt/c/Users/TRERICHA";
-    PATH = concatStringsSep ":" [
-      "$PATH"
-      "$HOME/.local/node/bin"
-      "$HOME/.local/bin"
-      "$HOME/.cargo/bin"
-      "$HOME/.nimble/bin"
-    ];
-  };
-
-  programs.zsh = {
+  programs.bash = {
     enable = true;
     shellAliases = {
       la = "ls -al";
@@ -102,37 +97,26 @@ in {
       gc = "git commit";
       intellij = "nvim";
     };
-    enableAutosuggestions = true;
-    enableSyntaxHighlighting = true;
-    enableCompletion = true;
-    plugins = [
-      {
-        name = "zsh-nix-shell";
-        file = "nix-shell.plugin.zsh";
-        src = pkgs.fetchFromGitHub {
-          owner = "chisui";
-          repo = "zsh-nix-shell";
-          rev = "v0.5.0";
-          sha256 = "0za4aiwwrlawnia4f29msk822rj9bgcygw6a8a6iikiwzjjz0g91";
-        };
-      }
-    ];
-    initExtra = ''
-      bindkey -e
-      autoload -Uz vcs_info
-      precmd () { vcs_info }
-      zstyle ':vcs_info:git:*' formats ' %F{green} %b%f'
-      setopt prompt_subst
-
-      envColor=blue
-      if [ -n "$IN_NIX_SHELL" ]; then
-        envColor=255
-      fi
-
-      PS1='%F{white}%3~/$vcs_info_msg_0_ %B%F{$envColor}λ%f%b '
-    '';
+    enableVteIntegration = true;
+    # enableCompletion = true;
+    sessionVariables = with lib.strings; {
+      EDITOR = "nvim";
+      SUDO_EDITOR = "nvim";
+      ZK_NOTEBOOK_DIR = "/home/trev/Notes";
+      SSH_AUTH_SOCK = "$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)";
+      WIN_HOME = "/mnt/c/Users/TRERICHA";
+      LOMBOK_JAR = "${pkgs.lombok}/share/java/lombok.jar";
+      PATH = concatStringsSep ":" [
+        "$PATH"
+          "$HOME/.local/node/bin"
+          "$HOME/.local/bin"
+          "$HOME/.cargo/bin"
+          "$HOME/.nimble/bin"
+      ];
+    };
+    initExtra = lib.strings.fileContents config/prompt;
   };
-  # }}}
+# }}}
 
   programs.git = {
     enable = true;
@@ -207,6 +191,7 @@ in {
     shims-*.d.ts
   '';
   xdg.configFile."zk".source = config/zk;
+  xdg.configFile."kitty/kitty.conf".source = config/kitty/kitty.conf;
 }
 
 # vim: foldmethod=marker
