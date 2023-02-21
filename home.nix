@@ -108,10 +108,10 @@ in {
       LOMBOK_JAR = "${pkgs.lombok}/share/java/lombok.jar";
       PATH = concatStringsSep ":" [
         "$PATH"
-          "$HOME/.local/node/bin"
-          "$HOME/.local/bin"
-          "$HOME/.cargo/bin"
-          "$HOME/.nimble/bin"
+        "$HOME/.local/node/bin"
+        "$HOME/.local/bin"
+        "$HOME/.cargo/bin"
+        "$HOME/.nimble/bin"
       ];
     };
     initExtra = lib.strings.fileContents config/prompt;
