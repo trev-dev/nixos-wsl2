@@ -191,6 +191,7 @@ in {
     shims-*.d.ts
   '';
   xdg.configFile."zk".source = config/zk;
+  home.file.".ideavimrc".source = config/ideavimrc;
   xdg.configFile."kitty/kitty.conf".source = config/kitty/kitty.conf;
 }
 
