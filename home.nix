@@ -1,7 +1,9 @@
 { config, pkgs, lib, ... }:
 
 let
-  unstable = import <nixpkgs-unstable> {};
+  unstable = import <nixpkgs-unstable> {
+    config.allowUnfree = true;
+  };
   current = import <nixpkgs-current> {};
 in {
   # Home Manager needs a bit of information about you and the
@@ -37,9 +39,9 @@ in {
     unstable.jdk19
     jp2a
     lombok
-    unstable.neovim
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     google-chrome
+    unstable.jetbrains.idea-ultimate
     newman
     nodejs
     noto-fonts
@@ -54,9 +56,9 @@ in {
     taskwarrior-tui
     timewarrior
     unzip
+    unstable.vim-full
     wget
     xclip
-    zk
     zoxide
   ];
 # }}}
@@ -79,7 +81,6 @@ in {
     shellAliases = {
       la = "ls -al";
       ll = "ls -l";
-      nv = "nvim";
       r = "ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd \"$LASTDIR\"";
       t = "task";
       lg = "lazygit";
@@ -95,14 +96,13 @@ in {
       gco = "git checkout";
       ga = "git add";
       gc = "git commit";
-      intellij = "nvim";
+      vs = "vim -S";
     };
     enableVteIntegration = true;
     # enableCompletion = true;
     sessionVariables = with lib.strings; {
-      EDITOR = "nvim";
-      SUDO_EDITOR = "nvim";
-      ZK_NOTEBOOK_DIR = "/home/trev/Notes";
+      EDITOR = "vim";
+      SUDO_EDITOR = "vim";
       SSH_AUTH_SOCK = "$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)";
       WIN_HOME = "/mnt/c/Users/TRERICHA";
       LOMBOK_JAR = "${pkgs.lombok}/share/java/lombok.jar";
@@ -189,8 +189,9 @@ in {
     shell.nix
     jsconfig.json
     shims-*.d.ts
+    .vim/*
+    Session.vim
   '';
-  xdg.configFile."zk".source = config/zk;
   home.file.".ideavimrc".source = config/ideavimrc;
   xdg.configFile."kitty/kitty.conf".source = config/kitty/kitty.conf;
 }
