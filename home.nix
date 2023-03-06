@@ -38,7 +38,7 @@ in {
     jp2a
     lombok
     unstable.neovim
-    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+    (nerdfonts.override { fonts = [ "FiraCode" ]; })
     google-chrome
     newman
     nodejs
