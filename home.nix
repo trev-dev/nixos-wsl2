@@ -44,6 +44,7 @@ in {
     newman
     nodejs
     noto-fonts
+    openssl
     pandoc
     postman
     python39
