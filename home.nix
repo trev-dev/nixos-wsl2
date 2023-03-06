@@ -50,7 +50,6 @@ in {
     python39
     ranger
     ripgrep
-    unstable.lua-language-server
     rnix-lsp
     taskwarrior
     taskwarrior-tui
