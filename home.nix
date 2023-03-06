@@ -38,7 +38,6 @@ in {
     kitty
     unstable.jdk19
     jp2a
-    lombok
     (nerdfonts.override { fonts = [ "FiraCode" ]; })
     google-chrome
     unstable.jetbrains.idea-ultimate
@@ -105,7 +104,6 @@ in {
       SUDO_EDITOR = "vim";
       SSH_AUTH_SOCK = "$(${pkgs.gnupg}/bin/gpgconf --list-dirs agent-ssh-socket)";
       WIN_HOME = "/mnt/c/Users/TRERICHA";
-      LOMBOK_JAR = "${pkgs.lombok}/share/java/lombok.jar";
       PATH = concatStringsSep ":" [
         "$PATH"
         "$HOME/.local/node/bin"
